@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
+import Navbar from "./Navbar";
 
 const CodeIDE = () => {
   const [code, setCode] = useState("");
@@ -66,48 +67,58 @@ const CodeIDE = () => {
   };
 
   return (
-    <div>
-      <div>
-        <label>Select Language:</label>
-        <select
-          value={selectedLanguage}
-          onChange={(e) => setSelectedLanguage(parseInt(e.target.value))}
-        >
-          {languageOptions.map((lang) => (
-            <option key={lang.id} value={lang.id}>
-              {lang.name}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <h2>Code Editor</h2>
-        <textarea
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-          placeholder="Enter your code here"
-          rows={10}
-        />
-      </div>
-      <div>
-        <h2>Input</h2>
-        <textarea
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Enter input for your code"
-          rows={4}
-        />
-      </div>
-
-      <div>
-        <button onClick={runCode}>Run</button>
-      </div>
-      <div>
-        <h2>Output</h2>
-        <pre>{output}</pre>
-      </div>
-    </div>
+        <div className="max-w-2xl mx-auto my-8 p-4 border rounded-md shadow-md">
+          <div className="mb-4">
+            <h2 className="text-lg font-semibold mb-2">Code Editor</h2>
+            <textarea
+              className="w-full p-2 border rounded-md"
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              placeholder="Enter your code here"
+              rows={10}
+            />
+          </div>
+          <div className="mb-4">
+            <h2 className="text-lg font-semibold mb-2">Input</h2>
+            <textarea
+              className="w-full p-2 border rounded-md"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Enter input for your code"
+              rows={4}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-semibold mb-1">
+              Select Language:
+            </label>
+            <select
+              className="w-full p-2 border rounded-md"
+              value={selectedLanguage}
+              onChange={(e) => setSelectedLanguage(parseInt(e.target.value))}
+            >
+              {languageOptions.map((lang) => (
+                <option key={lang.id} value={lang.id}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-4">
+            <button
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+              onClick={runCode}
+            >
+              Run
+            </button>
+          </div>
+          <div>
+            <h2 className="text-lg font-semibold mb-2">Output</h2>
+            <pre className="p-2 border rounded-md bg-gray-100">{output}</pre>
+          </div>
+        </div>
   );
 };
 
 export default CodeIDE;
+
