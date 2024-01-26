@@ -8,8 +8,8 @@ import { GoogleLogin } from "@react-oauth/google";
 import Navbar from "./components/Navbar";
 import CodeIDE from "./components/CodeIDE";
 import Video from "./components/Video";
-import SplitPane from "split-pane-react/esm/SplitPane";
-import Coding from "./components/coding";
+import Coding from "./components/Coding";
+import LoginPage from "./components/LoginPage";
 
 function App() {
   return (
@@ -18,8 +18,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/code" element={<CodeIDE />} />
-          <Route path="/coding" element={<Coding/>} />
+          <Route path="/coding" element={<Coding />} />
           <Route path="/watchxcode" element={<Video />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </BrowserRouter>
     </>
