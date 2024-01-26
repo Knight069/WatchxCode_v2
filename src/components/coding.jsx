@@ -27,79 +27,36 @@ const Coding = () => {
   };
 
   return (
-    <>
-    <div className={`h-screen ${isDarkMode ? "bg-gray-900 text-white" : ""}`}>
+    <div className={`h-screen ${isDarkMode ? "dark" : "light"}`}>
       <SplitPane split="vertical" minSize={200} defaultSize="50%">
-        {
-      <div>
-        <div
-          className={`bg-gray-200 p-4 overflow-y-auto ${
-            isDarkMode ? "dark:bg-gray-800" : ""
-          }`}
-        >
-          <h2
-            className={`text-lg font-semibold mb-4 ${
-              isDarkMode ? "text-gray-300" : ""
-            }`}
-          >
-            Coding Questions
-          </h2>
-          <ul>
-            {codingQuestions.map((question) => (
-              <li
-                key={question.id}
-                className={`cursor-pointer p-2 ${
-                  selectedQuestion === question.id
-                    ? "bg-blue-500 text-white"
-                    : ""
-                }`}
-                onClick={() => setSelectedQuestion(question.id)}
-              >
-                {question.title}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className={`p-4 ${isDarkMode ? "bg-gray-800" : "bg-white"}`}>
-          {selectedQuestion ? (
-            <div>
-              <h2
-                className={`text-lg font-semibold mb-4 ${
-                  isDarkMode ? "text-gray-300" : ""
-                }`}
-              >
-                Coding Area
-              </h2>
-              <div
-                className={`border rounded-md p-4 ${
-                  isDarkMode ? "bg-gray-700" : "bg-gray-100"
-                }`}
-              >
-                <h3
-                  className={`text-lg font-semibold mb-2 ${
-                    isDarkMode ? "text-gray-300" : ""
+        <div className={`coding-questions ${isDarkMode ? "dark" : "light"}`}>
+          <div className="p-4 overflow-y-auto h-full">
+            <h2 className="text-lg font-semibold mb-4">Coding Questions</h2>
+            <ul>
+              {codingQuestions.map((question) => (
+                <li
+                  key={question.id}
+                  className={`cursor-pointer p-2 ${
+                    selectedQuestion === question.id
+                      ? "bg-blue-500 text-white"
+                      : ""
                   }`}
+                  onClick={() => setSelectedQuestion(question.id)}
                 >
-                  {codingQuestions[selectedQuestion - 1].title}
-                </h3>
-                <p className={`${isDarkMode ? "text-gray-300" : ""}`}>
-                  {codingQuestions[selectedQuestion - 1].content}
-                </p>
-              </div>
-            </div>
-          ) : (
-            <div className={`text-center ${isDarkMode ? "text-gray-300" : ""}`}>
-              Select a question to start coding
-            </div>
-          )}
+                  {question.title}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
+        <div className={`code-ide ${isDarkMode ? "dark" : "light"}`}>
+          <CodeIDE
+            style={{
+              backgroundColor: isDarkMode ? "#333" : "#fff",
+              color: isDarkMode ? "#fff" : "#333",
+            }}
+          />
         </div>
-        }
-        {
-        <div>
-          <CodeIDE />
-        </div>
-        }
       </SplitPane>
 
       {/* Dark mode/light mode switch button */}
@@ -114,7 +71,6 @@ const Coding = () => {
         </button>
       </div>
     </div>
-    </>
   );
 };
 

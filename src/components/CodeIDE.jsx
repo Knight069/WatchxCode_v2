@@ -7,6 +7,7 @@ const CodeIDE = () => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState(50); // Default: JavaScript
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const languageOptions = [
     { id: 50, name: "JavaScript" },
@@ -66,59 +67,117 @@ const CodeIDE = () => {
     }
   };
 
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
   return (
-        <div className="max-w-2xl mx-auto my-8 p-4 border rounded-md shadow-md">
-          <div className="mb-4">
-            <h2 className="text-lg font-semibold mb-2">Code Editor</h2>
-            <textarea
-              className="w-full p-2 border rounded-md"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              placeholder="Enter your code here"
-              rows={10}
-            />
-          </div>
-          <div className="mb-4">
-            <h2 className="text-lg font-semibold mb-2">Input</h2>
-            <textarea
-              className="w-full p-2 border rounded-md"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Enter input for your code"
-              rows={4}
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-semibold mb-1">
-              Select Language:
-            </label>
-            <select
-              className="w-full p-2 border rounded-md"
-              value={selectedLanguage}
-              onChange={(e) => setSelectedLanguage(parseInt(e.target.value))}
-            >
-              {languageOptions.map((lang) => (
-                <option key={lang.id} value={lang.id}>
-                  {lang.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="mb-4">
-            <button
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-              onClick={runCode}
-            >
-              Run
-            </button>
-          </div>
-          <div>
-            <h2 className="text-lg font-semibold mb-2">Output</h2>
-            <pre className="p-2 border rounded-md bg-gray-100">{output}</pre>
-          </div>
-        </div>
+    <div
+      className={`max-w-2xl mx-auto my-8 p-4 border rounded-md shadow-md ${
+        isDarkMode ? "bg-gray-800 text-white" : "bg-white"
+      }`}
+    >
+      <div className="mb-4">
+        <h2
+          className={`text-lg font-semibold mb-2 ${
+            isDarkMode ? "text-gray-300" : ""
+          }`}
+        >
+          Code Editor
+        </h2>
+        <textarea
+          className={`w-full p-2 border rounded-md ${
+            isDarkMode ? "bg-gray-700 text-white" : "bg-gray-100"
+          }`}
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+          placeholder="Enter your code here"
+          rows={10}
+        />
+      </div>
+      <div className="mb-4">
+        <h2
+          className={`text-lg font-semibold mb-2 ${
+            isDarkMode ? "text-gray-300" : ""
+          }`}
+        >
+          Input
+        </h2>
+        <textarea
+          className={`w-full p-2 border rounded-md ${
+            isDarkMode ? "bg-gray-700 text-white" : "bg-gray-100"
+          }`}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Enter input for your code"
+          rows={4}
+        />
+      </div>
+      <div className="mb-4">
+        <label
+          className={`block text-sm font-semibold mb-1 ${
+            isDarkMode ? "text-gray-300" : ""
+          }`}
+        >
+          Select Language:
+        </label>
+        <select
+          className={`w-full p-2 border rounded-md ${
+            isDarkMode ? "bg-gray-700 text-white" : "bg-gray-100"
+          }`}
+          value={selectedLanguage}
+          onChange={(e) => setSelectedLanguage(parseInt(e.target.value))}
+        >
+          {languageOptions.map((lang) => (
+            <option key={lang.id} value={lang.id}>
+              {lang.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="mb-4">
+        <button
+          className={`bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 ${
+            isDarkMode ? "dark:bg-gray-600" : ""
+          }`}
+          onClick={runCode}
+        >
+          Run
+        </button>
+      </div>
+      <div>
+        <h2
+          className={`text-lg font-semibold mb-2 ${
+            isDarkMode ? "text-gray-300" : ""
+          }`}
+        >
+          Output
+        </h2>
+        <pre
+          className={`p-2 border rounded-md ${
+            isDarkMode ? "bg-gray-700 text-white" : "bg-gray-100"
+          }`}
+        >
+          {output}
+        </pre>
+      </div>
+      <div className="mb-4">
+        <label
+          className={`block text-sm font-semibold mb-1 ${
+            isDarkMode ? "text-gray-300" : ""
+          }`}
+        >
+          Dark Mode:
+        </label>
+        <input
+          type="checkbox"
+          checked={isDarkMode}
+          onChange={toggleDarkMode}
+          className="form-checkbox h-5 w-5 text-gray-600"
+        />
+      </div>
+    </div>
   );
 };
 
 export default CodeIDE;
-
